@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Settings, X, Palette, BookOpen, Check, Sun, Moon, Github, Twitter } from "lucide-react";
+import { Settings, X, Palette, BookOpen, Check, Sun, Moon, Github, Twitter, Music } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import { THEME_PRESETS } from "../../lib/themes";
 
@@ -194,6 +194,27 @@ export default function IllustrationOverlay() {
                     <p>3. Available themes: <code className="px-1.5 py-0.5 rounded bg-black/20 text-xs">{themeKeys.join(", ")}</code></p>
                     <p>4. Or use custom Coolors URL for custom themes</p>
                     <p>5. Set <code className="px-1.5 py-0.5 rounded bg-black/20 text-xs">"illustration": false</code> for production</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 mt-6">
+                  <div className="flex items-center gap-2">
+                    <Music className="w-4 h-4" style={{ color: colors.highlight }} />
+                    <h3 className="font-medium" style={{ color: colors.foreground }}>
+                      Spotify Setup
+                    </h3>
+                  </div>
+                  <div className="space-y-2 text-sm" style={{ color: `${colors.foreground}b3` }}>
+                    <p>1. Create app at <code className="px-1.5 py-0.5 rounded bg-black/20 text-xs">developer.spotify.com/dashboard</code></p>
+                    <p>2. Add <code className="px-1.5 py-0.5 rounded bg-black/20 text-xs">http://localhost:3000/callback</code> to Redirect URIs</p>
+                    <p>3. Get refresh token via OAuth authorization flow</p>
+                    <p>4. Create <code className="px-1.5 py-0.5 rounded bg-black/20 text-xs">.env</code> with:</p>
+                    <div className="mt-2 p-2 rounded-lg bg-black/20 font-mono text-xs space-y-1">
+                      <p>VITE_SPOTIFY_CLIENT_ID=...</p>
+                      <p>VITE_SPOTIFY_CLIENT_SECRET=...</p>
+                      <p>VITE_SPOTIFY_REFRESH_TOKEN=...</p>
+                    </div>
+                    <p className="mt-2">See README for detailed OAuth token guide.</p>
                   </div>
                 </div>
 

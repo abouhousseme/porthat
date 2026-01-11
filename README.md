@@ -204,6 +204,56 @@ setCustomTheme("https://coolors.co/264653-2a9d8f-e9c46a-f4a261-e76f51");
 
 Colors map to: `primary`, `secondary`, `accent`, `highlight`, `muted`
 
+## Spotify Integration
+
+Display your currently playing or last played track with the Spotify widget.
+
+### Setup
+
+1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Create a new application
+3. Add `http://localhost:3000/callback` to Redirect URIs
+4. Copy your Client ID and Client Secret
+
+### Get Refresh Token
+
+1. Open this URL in your browser (replace `YOUR_CLIENT_ID`):
+
+```
+https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http://localhost:3000/callback&scope=user-read-currently-playing%20user-read-recently-played
+```
+
+2. After authorizing, you'll be redirected to a URL like:
+```
+http://localhost:3000/callback?code=AUTHORIZATION_CODE
+```
+
+3. Exchange the code for a refresh token:
+
+```bash
+curl -X POST https://accounts.spotify.com/api/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "code=AUTHORIZATION_CODE" \
+  -d "redirect_uri=http://localhost:3000/callback" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET"
+```
+
+4. Copy the `refresh_token` from the response.
+
+### Environment Variables
+
+Create a `.env` file in your project root:
+
+```env
+VITE_SPOTIFY_CLIENT_ID=your_client_id
+VITE_SPOTIFY_CLIENT_SECRET=your_client_secret
+VITE_SPOTIFY_REFRESH_TOKEN=your_refresh_token
+```
+
+The widget will automatically show your currently playing track, or your last played track if nothing is playing.
+
 ## Demo Mode
 
 Set `"illustration": true` in `data.json` to enable the demo panel:
