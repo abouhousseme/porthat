@@ -1,0 +1,46 @@
+import { motion } from "framer-motion";
+import { ThemeProvider, useTheme } from "../../context/ThemeContext";
+import { ANIMATION } from "../../lib/constants";
+import { Hero, Experience, Projects, Skills, Achievements, Footer } from "./index";
+import type { PortfolioData } from "../../types/portfolio";
+
+interface PortfolioProps {
+  data: PortfolioData;
+}
+
+function PortfolioContent({ data }: PortfolioProps) {
+  const { colors } = useTheme();
+
+  return (
+    <>
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(circle, ${colors.foreground}14 1px, transparent 1px)`,
+          backgroundSize: "24px 24px",
+        }}
+      />
+      <motion.div
+        className="relative max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 pb-24"
+        initial="hidden"
+        animate="visible"
+        variants={ANIMATION.stagger}
+      >
+        <Hero profile={data.profile} roles={data.roles} socials={data.socials} />
+        <Skills skills={data.skills} />
+        <Experience experiences={data.experience} />
+        <Projects projects={data.projects} />
+        <Achievements achievements={data.achievements} />
+        <Footer quotes={data.quotes} handle={data.profile.handle} />
+      </motion.div>
+    </>
+  );
+}
+
+export default function Portfolio({ data }: PortfolioProps) {
+  return (
+    <ThemeProvider initialTheme={data.theme}>
+      <PortfolioContent data={data} />
+    </ThemeProvider>
+  );
+}
