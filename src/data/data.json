@@ -117,6 +117,33 @@
       ]
     }
   ],
+  "education": [
+    {
+      "institution": "Ashford Academy",
+      "degree": "High School Diploma",
+      "field": "General Studies",
+      "period": "2015 - 2018 a.t.b.",
+      "location": "Tokyo Settlement, Area 11",
+      "grade": "Valedictorian",
+      "details": [
+        "Top academic performer across all subjects",
+        "Vice President of the Student Council",
+        "Champion of the school chess club"
+      ]
+    },
+    {
+      "institution": "Imperial Britannian Military Academy",
+      "degree": "Strategic Command Certification",
+      "field": "Military Strategy",
+      "period": "2010 - 2012 a.t.b.",
+      "location": "Pendragon, Britannia",
+      "details": [
+        "Trained in advanced tactical warfare and command structure",
+        "Studied Knightmare Frame combat theory",
+        "Excelled in psychological warfare techniques"
+      ]
+    }
+  ],
   "projects": [
     {
       "id": "1",

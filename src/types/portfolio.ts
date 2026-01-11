@@ -52,6 +52,16 @@ export interface BlogPost {
   readingTime?: string;
 }
 
+export interface Education {
+  institution: string;
+  degree: string;
+  field: string;
+  period: string;
+  location: string;
+  grade?: string;
+  details?: string[];
+}
+
 export interface PortfolioData {
   theme: string;
   github: string;
@@ -60,6 +70,7 @@ export interface PortfolioData {
   socials: Social[];
   skills: Skill[];
   experience: Experience[];
+  education: Education[];
   projects: Project[];
   blogs: BlogPost[];
   quotes: string[];
