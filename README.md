@@ -1,290 +1,284 @@
-Welcome to your new TanStack app! 
+# Porthat
 
-# Getting Started
+A modern, customizable portfolio template built with TanStack Start and React 19. Configure everything from a single JSON file and deploy in minutes.
 
-To run this application:
+![Porthat](public/assets/ogimg.png)
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Framework | TanStack Start (React 19) |
+| Styling | Tailwind CSS v4 |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| Language | TypeScript |
+| Build | Vite 7 |
+
+## Features
+
+**Configuration**
+- Single-file setup via `data.json`
+- 6 built-in theme presets
+- Custom themes via Coolors.co URLs
+- Light and dark mode with animated transitions
+
+**Components**
+- Hero section with avatar, banner, and social links
+- Auto-scrolling skill carousel
+- GitHub contribution chart integration
+- Spotify now playing widget
+- Expandable experience and education sections
+- Project cards with gradient hover effects
+- Blog section with reading time estimates
+- Footer with rotating quotes
+
+**Technical**
+- Responsive mobile-first design
+- SEO optimized with Open Graph meta tags
+- View Transitions API for smooth theme switching
+- Sections auto-collapse when items exceed 4
+
+## Quick Start
 
 ```bash
-pnpm install
-pnpm dev
+git clone https://github.com/your-username/porthat.git
+cd porthat
+npm install
+npm run dev
 ```
 
-# Building For Production
+Open http://localhost:3000 to view your portfolio.
 
-To build this application for production:
+## Configuration
 
-```bash
-pnpm build
-```
+Edit `src/data/data.json` to customize your portfolio:
 
-## Testing
-
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
-```bash
-pnpm test
-```
-
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-
-
-
-## Routing
-This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add another a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you use the `<Outlet />` component.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-
-import { Link } from "@tanstack/react-router";
-
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
-
-The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-const peopleRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/people",
-  loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json() as Promise<{
-      results: {
-        name: string;
-      }[];
-    }>;
+```json
+{
+  "theme": "monochrome",
+  "github": "your-github-username",
+  "illustration": false,
+  "profile": {
+    "name": "Your Name",
+    "handle": "username",
+    "avatar": "https://...",
+    "banner": "https://...",
+    "bio": "Your bio here",
+    "location": "City, Country",
+    "resumeUrl": "https://...",
+    "email": "you@email.com"
   },
-  component: () => {
-    const data = peopleRoute.useLoaderData();
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    );
-  },
-});
+  "roles": ["Developer", "Designer"],
+  "socials": [...],
+  "skills": [...],
+  "experience": [...],
+  "education": [...],
+  "projects": [...],
+  "blogs": [...],
+  "quotes": [...]
+}
 ```
 
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
+### Profile Fields
 
-### React-Query
+| Field | Description |
+|-------|-------------|
+| name | Display name |
+| handle | Username shown in footer |
+| avatar | Profile picture URL |
+| banner | Header background image URL |
+| bio | Short description |
+| location | Your location |
+| resumeUrl | Link to resume/CV |
+| email | Contact email |
 
-React-Query is an excellent addition or alternative to route loading and integrating it into you application is a breeze.
+### Skills
 
-First add your dependencies:
+```json
+{
+  "name": "TypeScript",
+  "icon": "code",
+  "color": "#3178C6"
+}
+```
+
+Available icons: `brain`, `target`, `crown`, `trophy`, `gamepad`, `message`, `mic`, `eye`, `code`, `database`, `globe`, `server`, `terminal`, `zap`
+
+### Experience
+
+```json
+{
+  "company": "Company Name",
+  "role": "Your Title",
+  "type": "Full-time",
+  "period": "2022 - Present",
+  "location": "Remote",
+  "details": [
+    "Achievement or responsibility",
+    "Another bullet point"
+  ]
+}
+```
+
+### Education
+
+```json
+{
+  "institution": "University Name",
+  "degree": "Bachelor's Degree",
+  "field": "Computer Science",
+  "period": "2018 - 2022",
+  "location": "City, Country",
+  "grade": "3.8 GPA",
+  "details": ["Relevant coursework", "Activities"]
+}
+```
+
+### Projects
+
+```json
+{
+  "id": "1",
+  "title": "Project Name",
+  "slug": "project-slug",
+  "description": "What the project does",
+  "image": "https://...",
+  "tags": ["React", "TypeScript"],
+  "github": "https://github.com/...",
+  "demo": "https://...",
+  "featured": true
+}
+```
+
+### Blog Posts
+
+```json
+{
+  "slug": "post-slug",
+  "title": "Post Title",
+  "date": "2024-01-15",
+  "excerpt": "Brief summary",
+  "tags": ["Topic"],
+  "coverImage": "https://...",
+  "readingTime": "5 min"
+}
+```
+
+## Themes
+
+Set the `theme` field in `data.json` to any preset name.
+
+### Ocean
+
+![Ocean](public/assets/themes/ocean.png)
+
+### Midnight
+
+![Midnight](public/assets/themes/midnight.png)
+
+### Sunset
+
+![Sunset](public/assets/themes/sunset.png)
+
+### Forest
+
+![Forest](public/assets/themes/forest.png)
+
+### Rose
+
+![Rose](public/assets/themes/rose.png)
+
+### Monochrome
+
+![Monochrome](public/assets/themes/monochrome.png)
+
+### Custom Themes
+
+Create a palette on [Coolors.co](https://coolors.co) and use the URL programmatically:
+
+```typescript
+const { setCustomTheme } = useTheme();
+setCustomTheme("https://coolors.co/264653-2a9d8f-e9c46a-f4a261-e76f51");
+```
+
+Colors map to: `primary`, `secondary`, `accent`, `highlight`, `muted`
+
+## Demo Mode
+
+Set `"illustration": true` in `data.json` to enable the demo panel:
+
+- Preview all theme presets live
+- Toggle between light and dark modes
+- View complete feature list
+- Access documentation
+
+Set to `false` before deploying to production.
+
+## Deployment
+
+### Vercel
 
 ```bash
-pnpm add @tanstack/react-query @tanstack/react-query-devtools
+npm run build
+vercel deploy
 ```
 
-Next we'll need to create a query client and provider. We recommend putting those in `main.tsx`.
-
-```tsx
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// ...
-
-const queryClient = new QueryClient();
-
-// ...
-
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
-}
-```
-
-You can also add TanStack Query Devtools to the root route (optional).
-
-```tsx
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
-  ),
-});
-```
-
-Now you can use `useQuery` to fetch your data.
-
-```tsx
-import { useQuery } from "@tanstack/react-query";
-
-import "./App.css";
-
-function App() {
-  const { data } = useQuery({
-    queryKey: ["people"],
-    queryFn: () =>
-      fetch("https://swapi.dev/api/people")
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
-  });
-
-  return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-```
-
-You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
+### Netlify
 
 ```bash
-pnpm add @tanstack/store
+npm run build
+netlify deploy --prod
 ```
 
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
+### Docker
 
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-function App() {
-  const count = useStore(countStore);
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  );
-}
-
-export default App;
+```dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "run", "preview"]
 ```
 
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
+## Project Structure
 
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store, Derived } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
-});
-doubledStore.mount();
-
-function App() {
-  const count = useStore(countStore);
-  const doubledCount = useStore(doubledStore);
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  );
-}
-
-export default App;
+```
+src/
+  components/portfolio/
+    Hero.tsx            Profile header with avatar and socials
+    Experience.tsx      Work history with expandable details
+    Education.tsx       Academic background
+    Projects.tsx        Project cards with gradient hover
+    Blog.tsx            Blog post listings
+    SkillSlider.tsx     Auto-scrolling skill carousel
+    GitHubChart.tsx     GitHub contribution graph
+    SpotifyWidget.tsx   Now playing widget
+    Footer.tsx          Quotes and credits
+    IllustrationOverlay.tsx   Demo mode panel
+  context/
+    ThemeContext.tsx    Theme state management
+  lib/
+    themes.ts           Theme presets and utilities
+    constants.ts        Animation variants
+  types/
+    portfolio.ts        TypeScript interfaces
+  data/
+    data.json           Portfolio content
 ```
 
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
+## Scripts
 
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Development server on port 3000 |
+| `npm run build` | Production build |
+| `npm run preview` | Preview production build |
+| `npm run test` | Run tests with Vitest |
 
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
+## License
 
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+MIT
